@@ -1,47 +1,47 @@
 import React from "react";
 import {
+  FaUsers,
+  FaCalendarCheck,
+  FaBuilding,
   FaChartLine,
-  FaCog,
-  FaHeart,
+  FaMoneyCheckAlt,
   FaHome,
-  FaListUl,
-  FaMusic,
-  FaPodcast,
+  FaCog,
+  FaTachometerAlt,
 } from "react-icons/fa";
 
 const navLinks = [
   {
-    title: "My Music",
-    icon: FaMusic,
-    link: "/music",
+    title: "Employees",
+    icon: FaUsers,
+    link: "/employees",
   },
   {
-    title: "Favorites",
-    icon: FaHeart,
-    link: "/favorites",
+    title: "Attendance",
+    icon: FaCalendarCheck,
+    link: "/attendance",
   },
   {
-    title: "Playlists",
-    icon: FaListUl,
-    link: "/playlists",
+    title: "Departments",
+    icon: FaBuilding,
+    link: "/departments",
   },
   {
-    title: "Podcasts",
-    icon: FaPodcast,
-    link: "/podcasts",
-  },
-  {
-    title: "Activity",
+    title: "Performance",
     icon: FaChartLine,
-    link: "/activity",
+    link: "/performance",
   },
   {
-    title: "Settings",
+    title: "Payroll Manage",
+    icon: FaMoneyCheckAlt,
+    link: "/payroll",
+  },
+  {
+    title: " System Settings",
     icon: FaCog,
     link: "/settings",
   },
 ];
-
 const Sidebar = () => {
   return (
     <div>
