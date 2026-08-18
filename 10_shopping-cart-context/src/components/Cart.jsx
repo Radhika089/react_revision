@@ -1,11 +1,9 @@
 import React from "react";
 import CartItem from "./CartItem";
+import { useCart } from "../context/CartContext";
 
 const Cart = () => {
-  // Temporary UI data.
-  // Replace this with Context data.
-
-  const cartItems = [];
+  const { cartItems, totalItems } = useCart();
 
   return (
     <section className="bg-white rounded-2xl border border-gray-200 shadow-sm p-5">
@@ -19,7 +17,7 @@ const Cart = () => {
         </div>
 
         <span className="px-3 py-1 rounded-full bg-gray-100 text-sm font-medium">
-          {cartItems.length} items
+          {totalItems()} items
         </span>
       </div>
 
