@@ -2,6 +2,7 @@ import React from "react";
 import ProductList from "./components/ProductList";
 import Cart from "./components/Cart";
 import CartSummary from "./components/CartSummary";
+import CartProvider from "./context/CartContext";
 
 const App = () => {
   return (
@@ -18,20 +19,20 @@ const App = () => {
       </header>
 
       {/* Main */}
-      <main className="max-w-7xl mx-auto px-5 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Products */}
-          <div className="lg:col-span-2">
-            <ProductList />
-          </div>
+      <CartProvider>
+        <main className="max-w-7xl mx-auto px-5 py-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="lg:col-span-2">
+              <ProductList />
+            </div>
 
-          {/* Cart */}
-          <div className="space-y-6">
-            <Cart />
-            <CartSummary />
+            <div className="space-y-6">
+              <Cart />
+              <CartSummary />
+            </div>
           </div>
-        </div>
-      </main>
+        </main>
+      </CartProvider>
     </div>
   );
 };
