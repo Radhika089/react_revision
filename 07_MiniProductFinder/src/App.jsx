@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "./components/Header";
 import CategoryFilter from "./components/CategoryFilter";
 import ProductList from "./components/ProductList";
+import { products } from "./data/products";
 
 const App = () => {
+  const [search, setSearch] = useState("");
+
+  const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(search.toLowerCase()),
+  );
+
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header />
+      <Header search={search} setSearch={setSearch} />
 
       <main className="max-w-7xl mx-auto px-5 py-10">
         {/* Hero */}
@@ -40,10 +47,12 @@ const App = () => {
               </p>
             </div>
 
-            <span className="text-sm text-gray-500">6 products</span>
+            <span className="text-sm text-gray-500">
+              {filteredProducts.length} Products
+            </span>
           </div>
 
-          <ProductList />
+          <ProductList filteredProducts={filteredProducts} />
         </section>
       </main>
     </div>

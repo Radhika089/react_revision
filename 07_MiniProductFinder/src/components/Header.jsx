@@ -1,7 +1,7 @@
 import React from "react";
 import { Heart, Search } from "lucide-react";
 
-const Header = () => {
+const Header = ({ search, setSearch }) => {
   return (
     <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
       <div className="max-w-7xl mx-auto px-5 py-4">
@@ -20,6 +20,8 @@ const Header = () => {
               />
 
               <input
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
                 type="text"
                 placeholder="Search products..."
                 className="w-64 border border-gray-300 rounded-xl py-2.5 pl-10 pr-4 outline-none focus:ring-2 focus:ring-black/10"
@@ -44,6 +46,8 @@ const Header = () => {
           />
 
           <input
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
             type="text"
             placeholder="Search products..."
             className="w-full border border-gray-300 rounded-xl py-2.5 pl-10 pr-4 outline-none"
