@@ -1,7 +1,7 @@
 import React from "react";
 import { Heart } from "lucide-react";
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, toggleFavorite, favorites }) => {
   return (
     <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition">
       <div className="relative h-56 bg-gray-100">
@@ -11,8 +11,13 @@ const ProductCard = ({ product }) => {
           className="w-full h-full object-cover"
         />
 
-        <button className="absolute top-3 right-3 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:bg-gray-50">
-          <Heart size={19} />
+        <button
+          onClick={() => toggleFavorite(product.id)}
+          className="absolute top-3 right-3 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:bg-gray-50">
+          <Heart
+            size={19}
+            fill={favorites.includes(product.id) ? "black" : "none"}
+          />
         </button>
       </div>
 

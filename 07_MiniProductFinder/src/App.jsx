@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./components/Header";
 import CategoryFilter from "./components/CategoryFilter";
 import ProductList from "./components/ProductList";
@@ -7,6 +7,17 @@ import { products } from "./data/products";
 const App = () => {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("");
+  const [favorites, setFavorites] = useState([]);
+
+  const toggleFavorite = (id) => {
+    setFavorites((prev) => {
+      if (prev.includes(id)) {
+        return prev.filter((item) => item !== id);
+      } else {
+        return [...prev, id];
+      }
+    });
+  };
 
   const filteredProducts = products.filter((product) => {
     const matchSearch = product.name
@@ -18,9 +29,21 @@ const App = () => {
     return matchSearch && matchCategory;
   });
 
+  useEffect(() => {
+    const savedFavorites = JSON.parse(localStorage.getItem("favorites"));
+
+    if (savedFavorites) {
+      setFavorites(savedFavorites);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }, [favorites]);
+
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header search={search} setSearch={setSearch} />
+      <Header search={search} setSearch={setSearch} favorites={favorites} />
 
       <main className="max-w-7xl mx-auto px-5 py-10">
         {/* Hero */}
@@ -59,7 +82,11 @@ const App = () => {
             </span>
           </div>
 
-          <ProductList filteredProducts={filteredProducts} />
+          <ProductList
+            filteredProducts={filteredProducts}
+            toggleFavorite={toggleFavorite}
+            favorites={favorites}
+          />
         </section>
       </main>
     </div>

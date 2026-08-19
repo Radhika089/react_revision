@@ -1,7 +1,7 @@
 import React from "react";
 import { Heart, Search } from "lucide-react";
 
-const Header = ({ search, setSearch }) => {
+const Header = ({ search, setSearch, favorites }) => {
   return (
     <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
       <div className="max-w-7xl mx-auto px-5 py-4">
@@ -32,7 +32,7 @@ const Header = ({ search, setSearch }) => {
               <Heart size={20} />
 
               <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-black text-white text-xs flex items-center justify-center">
-                0
+                {favorites.length}
               </span>
             </button>
           </div>
