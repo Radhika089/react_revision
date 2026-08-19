@@ -6,10 +6,17 @@ import { products } from "./data/products";
 
 const App = () => {
   const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("");
 
-  const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(search.toLowerCase()),
-  );
+  const filteredProducts = products.filter((product) => {
+    const matchSearch = product.name
+      .toLowerCase()
+      .includes(search.toLowerCase());
+
+    const matchCategory = category === "" || product.category === category;
+
+    return matchSearch && matchCategory;
+  });
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -33,7 +40,7 @@ const App = () => {
             <h2 className="text-xl font-bold text-gray-900">Categories</h2>
           </div>
 
-          <CategoryFilter />
+          <CategoryFilter category={category} setCategory={setCategory} />
         </section>
 
         {/* Products */}

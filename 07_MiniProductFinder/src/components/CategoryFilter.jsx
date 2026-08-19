@@ -1,19 +1,20 @@
 import React from "react";
 
-const CategoryFilter = () => {
+const CategoryFilter = ({ category, setCategory }) => {
   const categories = ["All", "Electronics", "Fashion", "Home"];
 
   return (
     <div className="flex flex-wrap gap-3">
-      {categories.map((category) => (
+      {categories.map((item) => (
         <button
-          key={category}
+          onClick={() => (item === "All" ? setCategory("") : setCategory(item))}
+          key={item}
           className={`px-4 py-2 rounded-xl text-sm font-medium transition ${
-            category === "All"
+            (item === "All" && category === "") || item === category
               ? "bg-black text-white"
               : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-100"
           }`}>
-          {category}
+          {item}
         </button>
       ))}
     </div>
