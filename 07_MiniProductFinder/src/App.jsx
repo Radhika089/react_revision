@@ -1,7 +1,14 @@
 import React from "react";
+import SearchBar from "./components/SearchBar";
+import Header from "./components/Header";
 
 const App = () => {
-  return <div>App</div>;
+  return (
+    <div className="bg-gray-50">
+      <Header />
+      <SearchBar />
+    </div>
+  );
 };
 
 export default App;
