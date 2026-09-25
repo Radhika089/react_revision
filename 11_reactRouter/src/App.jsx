@@ -1,46 +1,50 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const App = () => {
-  const [search, setSearch] = useState("");
-  const [user, setUser] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState();
+  const [todos, setTodos] = useState([]);
+  const [input, setInput] = useState("");
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      const response = await fetch(
-        "https://jsonplaceholder.typicode.com/users",
-      );
-      const data = await response.json();
-      setUser(data);
-      setLoading(false);
-      setError("");
-    };
-    fetchUsers();
-  }, []);
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  const filteredUser = user.filter((item) =>
-    item.name.toLowerCase().includes(search.toLowerCase()),
-  );
+    setTodos((prev) => [
+      ...prev,
+      {
+        id: Date.now(),
+        text: input,
+      },
+    ]);
 
-  if (loading) {
-    return <h1>loading......</h1>;
-  }
+    setInput("");
+  };
+
+  const handleDelete = (id) => {
+    setTodos((prev) => prev.filter((todo) => todo.id !== id));
+  };
 
   return (
     <div className="bg-red-100 h-screen">
       <div className=" mx-auto max-w-md">
-        <input
-          type="text"
-          placeholder="Search Users...."
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        {filteredUser.map((item) => (
-          <div key={item.id} className="flex gap-3 mt-4">
-            <h1>{item.id}</h1>
-            <h1>{item.name}</h1>
-          </div>
-        ))}
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Enter tasks..."
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+          />
+          <button type="submit">Add</button>
+        </form>
+
+        {todos.length === 0 ? (
+          <p>No todo yet!</p>
+        ) : (
+          todos.map((todo) => (
+            <div key={todo.id}>
+              <h1>{todo.text}</h1>
+              <button onClick={() => handleDelete(todo.id)}>Delete todo</button>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
